@@ -1,0 +1,21 @@
+{
+  "usuarios": [],
+  "reservas": [],
+  "habitaciones": [
+    {
+      "id": 1,
+      "nombre": "Habitaci\u00f3n Simple",
+      "precio": 120
+    },
+    {
+      "id": 2,
+      "nombre": "Habitaci\u00f3n Doble",
+      "precio": 200
+    },
+    {
+      "id": 3,
+      "nombre": "Suite",
+      "precio": 350
+    }
+  ]
+}

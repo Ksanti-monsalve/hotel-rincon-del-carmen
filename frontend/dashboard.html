@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Dashboard - Hotel Rincón del Carmen</title>
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <img src="images/logo/marten-bjork-n_IKQDCyrG0-unsplash.jpg" alt="Logo Hotel" class="logo">
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="habitaciones.html">Habitaciones</a>
+      <a href="contacto.html">Contacto</a>
+      <a href="#" id="logoutBtn">Cerrar Sesión</a>
+    </nav>
+  </header>
+
+  <!-- Sección Dashboard -->
+  <main class="dashboard-container">
+    <h2>Mis Reservas</h2>
+    <div class="reservas-list" id="reservasList">
+      <!-- Las reservas se cargarán con JS -->
+    </div>
+  </main>
+
+  <script>
+    const reservasList = document.getElementById('reservasList');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    // Obtener usuario logueado
+    const usuario = JSON.parse(localStorage.getItem('usuario'));
+
+    if(!usuario){
+      alert('Debes iniciar sesión para ver tu dashboard.');
+      window.location.href = 'login.html';
+    }
+
+    // Cargar reservas del usuario
+    const reservas = JSON.parse(localStorage.getItem('reservas')) || [];
+    const misReservas = reservas.filter(r => r.usuarioId === usuario?.id);
+
+    function cargarReservas() {
+      reservasList.innerHTML = '';
+      if(misReservas.length === 0){
+        reservasList.innerHTML = '<p>No tienes reservas aún.</p>';
+        return;
+      }
+
+      misReservas.forEach(r => {
+        const card = document.createElement('div');
+        card.classList.add('reserva-card');
+        card.innerHTML = `
+          <h3>${r.habitacionNombre}</h3>
+          <p>Precio: $${r.precio}</p>
+          <p>Fecha: ${new Date(r.fecha).toLocaleString()}</p>
+        `;
+        reservasList.appendChild(card);
+      });
+    }
+
+    // Cerrar sesión
+    logoutBtn.addEventListener('click', () => {
+      localStorage.removeItem('usuario');
+      window.location.href = 'login.html';
+    });
+
+    cargarReservas();
+  </script>
+
+</body>
+</html>

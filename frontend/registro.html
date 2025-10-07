@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro - Hotel Rincón del Carmen</title>
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <img src="images/logo/marten-bjork-n_IKQDCyrG0-unsplash.jpg" alt="Logo Hotel" class="logo">
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="habitaciones.html">Habitaciones</a>
+      <a href="contacto.html">Contacto</a>
+      <a href="login.html">Iniciar Sesión</a>
+    </nav>
+  </header>
+
+  <!-- Sección Registro -->
+  <main class="login-container">
+    <h2>Registro</h2>
+    <form id="registroForm">
+      <input type="text" id="nombre" placeholder="Nombre completo" required>
+      <input type="email" id="email" placeholder="Correo electrónico" required>
+      <input type="password" id="password" placeholder="Contraseña" required>
+      <button type="submit">Registrarse</button>
+    </form>
+    <p>¿Ya tienes cuenta? <a href="login.html">Inicia sesión aquí</a></p>
+    <div id="mensaje"></div>
+  </main>
+
+  <script src="js/registro.js"></script>
+</body>
+</html>

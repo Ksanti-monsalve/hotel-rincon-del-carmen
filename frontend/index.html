@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hotel Rincón del Carmen</title>
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <img src="images/logo/marten-bjork-n_IKQDCyrG0-unsplash.jpg" alt="Logo Hotel" class="logo">
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="habitaciones.html">Habitaciones</a>
+      <a href="contacto.html">Contacto</a>
+      <a href="login.html">Iniciar Sesión</a>
+    </nav>
+  </header>
+
+  <!-- Carrusel -->
+  <section class="carrusel">
+    <div class="slide active">
+      <img src="images/cositas/valeriia-bugaiova-_pPHgeHz1uk-unsplash.jpg" alt="Vista hotel 1">
+    </div>
+    <div class="slide">
+      <img src="images/cositas/franck-morisset-UFhM8kMuQbo-unsplash.jpg" alt="Vista hotel 2">
+    </div>
+    <div class="slide">
+      <img src="images/cositas/artem-bryzgalov-wB07pAw7n3c-unsplash.jpg" alt="Vista hotel 3">
+    </div>
+
+    <button class="prev" onclick="cambiarSlide(-1)">&#10094;</button>
+    <button class="next" onclick="cambiarSlide(1)">&#10095;</button>
+  </section>
+
+  <!-- Sección de bienvenida -->
+  <section class="bienvenida" style="text-align:center; padding:50px 20px;">
+    <h1>Bienvenido al Hotel Rincón del Carmen</h1>
+    <p>Disfruta de una experiencia única con nuestras habitaciones y servicios exclusivos.</p>
+    <a href="habitaciones.html" class="btn">Ver Habitaciones</a>
+  </section>
+
+  <!-- Sección de servicios -->
+  <section class="servicios" style="max-width:1200px; margin:50px auto; display:flex; flex-wrap:wrap; justify-content:center; gap:20px;">
+    <div style="background:#fff; padding:20px; border-radius:12px; width:300px; box-shadow:0 5px 15px rgba(0,0,0,0.2); text-align:center;">
+      <img src="images/cositas/srini-somanchi-aAb9uz7wMRA-unsplash.jpg" alt="Piscina" style="width:100%; height:200px; object-fit:cover; border-radius:8px;">
+      <h3>Piscina</h3>
+      <p>Relájate en nuestra piscina con vistas increíbles.</p>
+    </div>
+    <div style="background:#fff; padding:20px; border-radius:12px; width:300px; box-shadow:0 5px 15px rgba(0,0,0,0.2); text-align:center;">
+      <img src="images/gastronomia/istockphoto-1829241109-1024x1024.jpg" alt="Gastronomía" style="width:100%; height:200px; object-fit:cover; border-radius:8px;">
+      <h3>Gastronomía</h3>
+      <p>Deléitate con platos típicos y comida internacional.</p>
+    </div>
+    <div style="background:#fff; padding:20px; border-radius:12px; width:300px; box-shadow:0 5px 15px rgba(0,0,0,0.2); text-align:center;">
+      <img src="images/cositas/huum-NHLS5hOSH0c-unsplash.jpg" alt="Spa" style="width:100%; height:200px; object-fit:cover; border-radius:8px;">
+      <h3>Spa</h3>
+      <p>Vive momentos de relajación en nuestro spa exclusivo.</p>
+    </div>
+  </section>
+
+  <script>
+    // Carrusel
+    let indice = 0;
+    const slides = document.querySelectorAll('.slide');
+
+    function mostrarSlide(n) {
+      slides.forEach(s => s.classList.remove('active'));
+      slides[indice].classList.add('active');
+    }
+
+    function cambiarSlide(n) {
+      indice += n;
+      if (indice < 0) indice = slides.length - 1;
+      if (indice >= slides.length) indice = 0;
+      mostrarSlide(indice);
+    }
+
+    // Avance automático cada 5s
+    setInterval(() => cambiarSlide(1), 5000);
+  </script>
+
+</body>
+</html>

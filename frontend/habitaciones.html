@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Habitaciones - Hotel Rincón del Carmen</title>
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <img src="images/logo/marten-bjork-n_IKQDCyrG0-unsplash.jpg" alt="Logo Hotel" class="logo">
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="habitaciones.html">Habitaciones</a>
+      <a href="contacto.html">Contacto</a>
+      <a href="login.html">Iniciar Sesión</a>
+    </nav>
+  </header>
+
+  <!-- Sección Habitaciones -->
+  <main class="habitaciones-container">
+    <h2>Nuestras Habitaciones</h2>
+    <div class="habitaciones-list" id="habitacionesList">
+      <!-- Las habitaciones se cargarán con JS -->
+    </div>
+  </main>
+
+  <script>
+    const habitacionesList = document.getElementById('habitacionesList');
+
+    // Datos de ejemplo (en producción se pueden traer del backend)
+    const habitaciones = [
+  { id: 1, nombre: 'Habitación Simple', precio: 120, imagen: 'imagenes/habitaciones/habitacion1.jpg' },
+  { id: 2, nombre: 'Habitación Doble', precio: 200, imagen: 'imagenes/habitaciones/habitacion2.jpg' },
+  { id: 3, nombre: 'Suite', precio: 350, imagen: 'imagenes/habitaciones/habitacion3.jpg' },
+  { id: 4, nombre: 'Suite Ejecutiva', precio: 400, imagen: 'imagenes/habitaciones/habitacion4.jpg' },
+  { id: 5, nombre: 'Habitación Familiar', precio: 250, imagen: 'imagenes/habitaciones/habitacion5.jpg' },
+  { id: 6, nombre: 'Habitación Premium', precio: 500, imagen: 'imagenes/habitaciones/habitacion6.jpg' }
+];
+
+
+    function cargarHabitaciones() {
+      habitacionesList.innerHTML = '';
+      habitaciones.forEach(h => {
+        const card = document.createElement('div');
+        card.classList.add('habitacion-card');
+        card.innerHTML = `
+          <img src="${h.imagen}" alt="${h.nombre}">
+          <h3>${h.nombre}</h3>
+          <p>Precio por noche: $${h.precio}</p>
+          <button onclick="reservar(${h.id}, '${h.nombre}', ${h.precio})">Reservar</button>
+        `;
+        habitacionesList.appendChild(card);
+      });
+    }
+
+    // Función para reservar (simulación local)
+    function reservar(id, nombre, precio) {
+      const usuario = JSON.parse(localStorage.getItem('usuario'));
+      if(!usuario){
+        alert('Debes iniciar sesión para reservar.');
+        window.location.href = 'login.html';
+        return;
+      }
+
+      // Guardar reserva en localStorage como ejemplo
+      let reservas = JSON.parse(localStorage.getItem('reservas')) || [];
+      reservas.push({ habitacionId: id, habitacionNombre: nombre, precio, fecha: new Date() });
+      localStorage.setItem('reservas', JSON.stringify(reservas));
+      alert('Reserva realizada correctamente!');
+    }
+
+    // Inicializar
+    cargarHabitaciones();
+  </script>
+
+</body>
+</html>
