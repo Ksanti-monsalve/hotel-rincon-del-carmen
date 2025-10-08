@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mis Reservas - Hotel Rincón del Carmen</title>
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <img src="images/logo/marten-bjork-n_IKQDCyrG0-unsplash.jpg" alt="Logo Hotel" class="logo">
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="habitaciones.html">Habitaciones</a>
+      <a href="reserva.html">Mis Reservas</a>
+      <a href="contacto.html">Contacto</a>
+      <a href="#" id="logout">Cerrar Sesión</a>
+    </nav>
+  </header>
+
+  <!-- Contenedor de Reservas -->
+  <main class="reservas-container" id="reservasContainer">
+    <!-- Se cargan las reservas con JS -->
+  </main>
+
+  <script src="js/reserva.js"></script>
+  <script>
+    // Cerrar sesión
+    document.getElementById("logout").addEventListener("click", () => {
+      localStorage.removeItem("usuario");
+      alert("Has cerrado sesión.");
+      window.location.href = "index.html";
+    });
+  </script>
+
+</body>
+</html>

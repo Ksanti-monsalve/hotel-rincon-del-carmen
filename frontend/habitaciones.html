@@ -47,7 +47,7 @@
         const card = document.createElement('div');
         card.classList.add('habitacion-card');
         card.innerHTML = `
-          <img src="${h.imagen}" alt="${h.nombre}">
+          <img src="${h.imagen}" alt="${h.imagen}">
           <h3>${h.nombre}</h3>
           <p>Precio por noche: $${h.precio}</p>
           <button onclick="reservar(${h.id}, '${h.nombre}', ${h.precio})">Reservar</button>
@@ -56,23 +56,40 @@
       });
     }
 
-    // Función para reservar (simulación local)
-    function reservar(id, nombre, precio) {
-      const usuario = JSON.parse(localStorage.getItem('usuario'));
-      if(!usuario){
-        alert('Debes iniciar sesión para reservar.');
-        window.location.href = 'login.html';
-        return;
-      }
+// ...existing code...
+function reservar(id, nombre, precio) {
+  const usuario = JSON.parse(localStorage.getItem('usuario'));
+  if(!usuario){
+    alert('Debes iniciar sesión para reservar.');
+    window.location.href = 'login.html';
+    return;
+  }
 
-      // Guardar reserva en localStorage como ejemplo
-      let reservas = JSON.parse(localStorage.getItem('reservas')) || [];
-      reservas.push({ habitacionId: id, habitacionNombre: nombre, precio, fecha: new Date() });
-      localStorage.setItem('reservas', JSON.stringify(reservas));
-      alert('Reserva realizada correctamente!');
-    }
-
-    // Inicializar
+  // Guardar reserva en localStorage como ejemplo
+  let reservas = JSON.parse(localStorage.getItem('reservas')) || [];
+  reservas.push({ 
+    habitacionId: id, 
+    habitacionNombre: nombre, 
+    precio, 
+    fecha: new Date(), 
+    usuarioNombre: usuario.nombre // Guarda el nombre del usuario
+  });
+  localStorage.setItem('reservas', JSON.stringify(reservas));
+  alert(`Reserva realizada correctamente por ${usuario.nombre}!`);
+}
+// ...existing code...
+function mostrarReservas() {
+  const reservas = JSON.parse(localStorage.getItem('reservas')) || [];
+  const reservasList = document.getElementById('reservasList');
+  reservasList.innerHTML = '';
+  reservas.forEach(r => {
+    reservasList.innerHTML += `
+      <div>
+        <strong>${r.usuarioNombre}</strong> reservó <em>${r.habitacionNombre}</em> por $${r.precio} el ${new Date(r.fecha).toLocaleString()}
+      </div>
+    `;
+  });
+}
     cargarHabitaciones();
   </script>
 
